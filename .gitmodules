@@ -1,0 +1,4 @@
+[submodule "vendor/kokiri"]
+	path = vendor/kokiri
+	url = https://github.com/newaypix/kokiri
+	branch = develop
