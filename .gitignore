@@ -34,3 +34,6 @@
 # Premake
 Makefile
 build
+
+# Folders
+.vscode
