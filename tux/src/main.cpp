@@ -1,7 +1,11 @@
 #include <iostream>
 
+#include "core/game.hpp"
+
 int main() {
-    std::cout << "tux" << std::endl;
+    Kokiri::Core::Game game("Tux", 800, 600);
+
+    game.loop();
 
     return 0;
 }
