@@ -25,7 +25,15 @@ project "tux"
     links {
         "kokiri:static",
         "glad:static",
-        "SDL2"
+
+        "SDL2",
+        "SDL2_ttf",
+        "SDL2_mixer",
+        "SDL2_image",
+
+        -- to work with .ogg files
+        "ogg",
+        "vorbis"
     }
 
     filter "configurations:debug"
