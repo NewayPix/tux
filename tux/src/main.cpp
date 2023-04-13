@@ -13,9 +13,12 @@ int main() {
     Track bgm("assets/audio/stateStage.ogg");
     Track effect("assets/audio/boom.wav");
 
-    Sprite sprite_tux(game.get_window(), "assets/img/ocean.jpg");
+    auto render = [&game](){
+        Sprite sprite_tux(game.get_window(), "assets/img/ocean.jpg");
+        sprite_tux.render(0,0);
+    };
 
-    sprite_tux.render(0, 0);
+    game.bind(FunctionType::Render, render);
 
     game.loop();
 
