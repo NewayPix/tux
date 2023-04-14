@@ -37,3 +37,6 @@ build
 
 # Folders
 .vscode
+
+# Assets
+*.zip
