@@ -10,7 +10,7 @@ int main() {
 
     Game game("Rafael Campos Nunes - 19/0098295", 1024, 600);
 
-    Track bgm("assets/audio/stateStage.ogg");
+    Track bgm("assets/audio/stageState.ogg");
     Track effect("assets/audio/boom.wav");
 
     auto render = [&game](){
@@ -20,10 +20,10 @@ int main() {
 
     game.bind(FunctionType::Render, render);
 
-    game.loop();
-
-    effect.play(1);
+    effect.play(-1);
     bgm.play(1); // not working over here (linux)
+
+    game.loop();
 
     return 0;
 }
