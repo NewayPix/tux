@@ -2,6 +2,17 @@
 
 A tux game.
 
+## Cloning
+
+This repository contains submodules, you'll have to fetch those before building
+anything. If you use `gh` use the following command.
+
+`gh repo clone newaypix/tux -- --recursive`
+
+Otherwise, use the old fashioned and plain git command
+
+`git clone https://github.com/Newaypix/tux --recursive`.
+
 # Building
 
 You need to build the dependency first (kokiri), generate the necessary build
