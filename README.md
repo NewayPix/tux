@@ -9,9 +9,9 @@ anything. If you use `gh` use the following command.
 
 `gh repo clone newaypix/tux -- --recursive`
 
-Otherwise, use the old fashioned and plain git command
+Otherwise, use the old fashioned and plain git command.
 
-`git clone https://github.com/Newaypix/tux --recursive`.
+`git clone https://github.com/Newaypix/tux --recursive`
 
 # Building
 
