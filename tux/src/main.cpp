@@ -42,7 +42,7 @@ int main() {
 
         if (e.get()->is_mouse_click(Event::Mouse::LeftButton)) {
             auto p = e.get()->get_mouse_position();
-            auto s = new Sprite(game.get_window(), "assets/img/penguin.png");
+            auto s = new Sprite(game.get_window(), "assets/img/penguinface.png");
 
             Log::info("click: ", p.x, p.y);
 
