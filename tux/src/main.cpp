@@ -48,6 +48,10 @@ int main() {
 
             assets.push_back(std::make_pair(p, s));
         }
+
+        if (e.get()->is_key_down(Event::Key::M)) {
+            Log::info("key M was pressed");
+        }
     };
 
     game.bind(FunctionType::Event, event);
