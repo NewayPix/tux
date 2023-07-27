@@ -24,3 +24,6 @@ libkokiri.a file, that file will be used when compiling the game.
 - Go to `vendor/kokiri` and execute `make kokiri`
 - Go back to the root folder and execute `make`
 - Make sure the binary is side to side with the assets folder
+
+Or... you can just execute the compile script to have build it. A lot of
+improvements to that script are needed. 
