@@ -17,51 +17,65 @@ int main() {
 
     Game game("Rafael Campos Nunes - 19/0098295", 1024, 600);
 
-    Track bgm("assets/audio/stageState.ogg");
-    Track effect("assets/audio/boom.wav");
+    auto level = new Scene(game.get_window(), "level");
+    auto menu = new Scene(game.get_window(), "menu");
+    auto over = new Scene(game.get_window(), "over");
 
-    std::vector<std::pair<v2<int>, Sprite*>> assets;
+    game.add_scene(menu);
+    game.add_scene(level);
+    game.add_scene(over);
 
-    Sprite background(game.get_window(), "assets/img/ocean.jpg");
+    game.set_active_scene("level");
 
-    // user render function
-    auto render = [&game, &background, &assets](){
-        background.render(0, 0);
+    game.load(Game::Resource("bgm", "assets/audio/stageState.ogg", ComponentType::Soundtrack));
+    game.load(Game::Resource("shot", "assets/audio/boom.wav", ComponentType::Soundtrack));
+    game.load(Game::Resource("background", "assets/img/ocean.jpg", ComponentType::Sprite));
+    game.load(Game::Resource("penguin", "assets/img/penguin.png", ComponentType::Sprite));
 
-        for (const auto& asset : assets) {
-            auto p = asset.first;
-            auto s = asset.second;
+    Entity::EntityProperties world_properties("background");
+    world_properties.size.x = 1024;
+    world_properties.size.y = 600;
 
-            s->render(p.x, p.y);
-        }
-    };
+    Entity world(world_properties);
 
-    // user event function
-    auto event = [&game, &assets]() {
+    auto b = game.retrieve("background");
+    auto m = game.retrieve("bgm");
+
+    if (b == nullptr || m == nullptr) {
+        Log::error("resource is null");
+        return 1;
+    }
+
+    world.add_component(b);
+    world.add_component(m);
+
+    auto p = dynamic_cast<Sprite*>(game.retrieve("penguin"));
+
+    Entity::EntityProperties player_properties("player");
+    player_properties.size.x = p->get_width();
+    player_properties.size.y = p->get_height();
+
+    Entity player(player_properties);
+
+    player.add_component(game.retrieve("penguin"));
+
+    // rendering order is VERY important
+    level->add_entity(&player);
+    level->add_entity(&world);
+
+    level->bind(FunctionType::Render, [&game](){});
+
+    level->bind(FunctionType::Event, [&game, &player]() {
         auto e = game.get_event();
 
         if (e.get()->is_mouse_click(Event::Mouse::LeftButton)) {
             auto p = e.get()->get_mouse_position();
-            auto s = new Sprite(game.get_window(), "assets/img/penguinface.png");
 
-            Log::info("click: ", p.x, p.y);
-
-            assets.push_back(std::make_pair(p, s));
+            player.set_position(p);
         }
-    };
-
-    game.bind(FunctionType::Event, event);
-    game.bind(FunctionType::Render, render);
-
-    effect.play(-1);
-    bgm.play(1);
+    });
 
     game.loop();
-
-    // clean everything
-    for (const auto& asset : assets) {
-        delete asset.second;
-    }
 
     return 0;
 }
