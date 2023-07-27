@@ -35,8 +35,10 @@ compile_game() {
 
     make > "${TUX_LOGS}" 2>&1 || return 1
 
-    cp ./build/tux/tux "${BASE}/build/"
+    cp ./build/tux/tux "${BUILD}/tux.out"
     cd "${BASE}" || return 1
+
+    chmod +x "${BUILD}/tux.out"
 }
 
 
